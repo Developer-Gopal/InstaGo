@@ -4,6 +4,7 @@ export const getMe = async (req, res) => {
   if (!req.user) {
     return res.status(401).json({ message: "unauthorized" });
   }
+  
   const user = await prisma.user.findUnique({
     where: { id: req.user.id },
     select: {
@@ -17,6 +18,7 @@ export const getMe = async (req, res) => {
   });
   res.status(200).json(user);
 };
+
 
 export const updateMe = async (req, res) => {
   const { bio, profilePic, isPrivate } = req.body;
@@ -38,6 +40,7 @@ export const deleteMe = async (req, res) => {
         id: req.user.id,
       },
     });
+
 
     return res.status(200).json({ message: "user deleted" });
   } catch (err) {

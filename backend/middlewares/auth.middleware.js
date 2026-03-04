@@ -7,7 +7,7 @@ export const authMiddleware = (req, res, next) => {
     return res.status(401).json({ message: "token required" });
   }
 
-  console.log("Auth Header:", authHeader);
+  // console.log("Auth Header:", authHeader);
 
   const token = authHeader.split(" ")[1];
 
@@ -18,7 +18,7 @@ export const authMiddleware = (req, res, next) => {
   try {
     const decoded = verifyToken(token);
     req.user = decoded;
-    console.log("Decoded:", decoded);
+    // console.log("Decoded:", decoded);
     next();
   } catch (err) {
     return res.status(401).json({ message: "invalid token" });
